@@ -3,6 +3,7 @@ var spawn = require('child_process').spawn;
 var gutil = require('gulp-util');
 var map = require('map-stream');
 var concat = require('concat-stream');
+var pause = require('pause-stream');
 
 module.exports = function (options) {
 	options = options || {};
@@ -26,6 +27,14 @@ module.exports = function (options) {
 		
 		var cp = spawn('convert', args);
 		cp.stdout.pipe(concat(function (data) {
+			if (file.isBuffer()) {
+				file.contents = data;
+			}
+			if (file.isStream()) {
+				file.contents = pause()
+				file.contents.pause();
+				file.contents.write(data);
+			}
 			file.contents = data;
 			file.path = gutil.replaceExtension(file.path, '.webp');
 			cb(null, file);
