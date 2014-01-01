@@ -20,16 +20,25 @@ module.exports = function (options) {
 	args.push('webp:-');
 
 	return map(function (file, cb) {
+		if (file.isNull()) {
+			return cb(null, file);
+		}
+		
 		var cp = spawn('convert', args);
-		cp.stdin.write(file.contents);
 		cp.stdout.pipe(concat(function (data) {
 			file.contents = data;
 			file.path = gutil.replaceExtension(file.path, '.webp');
 			cb(null, file);
 		}));
-		cp.stdin.end();
 		cp.stderr.on('data', function (data) {
 			cb(new Error('gulp-webp: ' + data.toString()));
 		});
+		
+		if (file.isBuffer()) {
+			cp.stdin.end(file.contents);
+		}
+		if (file.isStream()) {
+			file.contents.pipe(cp.stdin);
+		}
 	});
 };
