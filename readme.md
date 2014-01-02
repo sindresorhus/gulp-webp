@@ -9,6 +9,8 @@ Requires [imagemagick](http://www.imagemagick.org/script/binary-releases.php) to
 
 - OS X: `brew install imagemagick --with-webp`
 
+You can check whether your imagemagick install supports WebP by running: `identify -list format | grep webp`
+
 
 ## Install
 
