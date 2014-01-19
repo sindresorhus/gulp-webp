@@ -2,11 +2,10 @@ language: node_js
 node_js:
   - '0.10'
 before_install:
+  - sudo apt-get build-dep imagemagick
   - sudo apt-get install libwebp-dev devscripts
-  - wget http://www.imagemagick.org/download/ImageMagick.tar.gz
-  - tar xf ImageMagick.tar.gz
-  - cd ImageMagick*
-  - ./configure --prefix=/usr --with-webp
-  - make
-  - sudo make install
+  - apt-get source imagemagick
+  - cd imagemagick-*
+  - debuild -uc -us
+  - sudo dpkg -i ../*magick*.deb
   - cd ..
