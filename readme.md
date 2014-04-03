@@ -1,4 +1,4 @@
-# [gulp](https://github.com/wearefractal/gulp)-webp [![Build Status](https://secure.travis-ci.org/sindresorhus/gulp-webp.png?branch=master)](http://travis-ci.org/sindresorhus/gulp-webp)
+# [gulp](http://gulpjs.com)-webp [![Build Status](https://travis-ci.org/sindresorhus/gulp-webp.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-webp)
 
 > Convert images to [WebP](https://developers.google.com/speed/webp/)
 
@@ -14,14 +14,12 @@ You can check whether your imagemagick install supports WebP by running: `identi
 
 ## Install
 
-Install with [npm](https://npmjs.org/package/gulp-webp)
-
-```
-npm install --save-dev gulp-webp
+```bash
+$ npm install --save-dev gulp-webp
 ```
 
 
-## Example
+## Usage
 
 ```js
 var gulp = require('gulp');
@@ -56,4 +54,4 @@ Default: `false`
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
