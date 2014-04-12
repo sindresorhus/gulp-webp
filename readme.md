@@ -1,4 +1,4 @@
-# [gulp](http://gulpjs.com)-webp [![Build Status](https://travis-ci.org/sindresorhus/gulp-webp.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-webp)
+# [gulp](http://gulpjs.com)-webp
 
 > Convert images to [WebP](https://developers.google.com/speed/webp/)
 
@@ -26,7 +26,7 @@ var gulp = require('gulp');
 var webp = require('gulp-webp');
 
 gulp.task('default', function () {
-	gulp.src('src/image.jpg')
+	return gulp.src('src/image.jpg')
 		.pipe(webp())
 		.pipe(gulp.dest('dist'));
 });
