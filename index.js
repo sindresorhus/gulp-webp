@@ -51,9 +51,9 @@ module.exports = function (options) {
 		}.bind(this)));
 
 		cp.stderr.on('data', function (data) {
-			this.emit('error', new gutil.PluginError('gulp-webp', data.toString()));
+			this.emit('error', new gutil.PluginError('gulp-webp', data.toString(), {fileName: file.path}));
 			this.push(file);
-			return cb();
+			cb();
 		}.bind(this));
 
 		if (file.isBuffer()) {

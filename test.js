@@ -2,7 +2,7 @@
 var fs = require('fs');
 var assert = require('assert');
 var gutil = require('gulp-util');
-var webp = require('./index');
+var webp = require('./');
 
 it('should convert images to WebP', function (cb) {
 	var LOSSY_SIZE = 20000;

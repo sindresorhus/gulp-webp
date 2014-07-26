@@ -14,7 +14,7 @@ You can check whether your imagemagick install supports WebP by running: `identi
 
 ## Install
 
-```bash
+```sh
 $ npm install --save-dev gulp-webp
 ```
 

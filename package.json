@@ -33,10 +33,10 @@
     "gif"
   ],
   "dependencies": {
-    "gulp-util": "~2.2.0",
-    "through2": "~0.4.0",
-    "concat-stream": "~1.4.1",
-    "pause-stream": "~0.0.11"
+    "concat-stream": "^1.4.1",
+    "gulp-util": "^3.0.0",
+    "pause-stream": "^0.0.11",
+    "through2": "^0.5.1"
   },
   "devDependencies": {
     "mocha": "*"
