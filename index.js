@@ -15,20 +15,20 @@ module.exports = function (options) {
 	}
 
 	if (options.lossless) {
-		args.push('-define', 'webp:lossless=' + options.lossless)
+		args.push('-define', 'webp:lossless=' + options.lossless);
 	}
 
 	args.push('webp:-');
 
 	return through.obj(function (file, enc, cb) {
 		if (file.isNull()) {
-			this.push(file);
-			return cb();
+			cb(null, file);
+			return;
 		}
 
 		if (file.isStream()) {
-			this.emit('error', new gutil.PluginError('gulp-webp', 'Streaming not supported'));
-			return cb();
+			cb(new gutil.PluginError('gulp-webp', 'Streaming not supported'));
+			return;
 		}
 
 		var cp = spawn('convert', args);
@@ -39,22 +39,21 @@ module.exports = function (options) {
 			}
 
 			if (file.isStream()) {
-				file.contents = pause()
+				file.contents = pause();
 				file.contents.pause();
 				file.contents.write(data);
 			}
 
 			file.contents = data;
 			file.path = gutil.replaceExtension(file.path, '.webp');
-			this.push(file);
-			cb();
-		}.bind(this)));
+			cb(null, file);
+		}));
 
-		cp.stderr.on('data', function (data) {
-			this.emit('error', new gutil.PluginError('gulp-webp', data.toString(), {fileName: file.path}));
-			this.push(file);
-			cb();
-		}.bind(this));
+		cp.stderr.setEncoding('utf8');
+
+		cp.stderr.on('data', function (str) {
+			cb(new gutil.PluginError('gulp-webp', str, {fileName: file.path}));
+		});
 
 		if (file.isBuffer()) {
 			cp.stdin.end(file.contents);

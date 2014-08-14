@@ -41,17 +41,17 @@ gulp.task('default', function () {
 
 ##### quality
 
-Type: `Number`  
+Type: `number`  
 Default: `100`  
 Min: `0`  
 Max: `100`
 
 ##### lossless
 
-Type: `Boolean`  
+Type: `boolean`  
 Default: `false`
 
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT) © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](http://sindresorhus.com)
