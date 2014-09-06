@@ -1,24 +1,22 @@
 'use strict';
-var spawn = require('child_process').spawn;
 var gutil = require('gulp-util');
 var through = require('through2');
-var concat = require('concat-stream');
-var pause = require('pause-stream');
+var ExecBuffer = require('exec-buffer');
+var webp = require('cwebp-bin').path;
 
 module.exports = function (options) {
 	options = options || {};
 
-	var args = ['-'];
+	var exec = new ExecBuffer();
+	var args = ['-quiet'];
 
 	if (options.quality) {
-		args.push('-quality', options.quality);
+		args.push('-q', options.quality);
 	}
 
 	if (options.lossless) {
-		args.push('-define', 'webp:lossless=' + options.lossless);
+		args.push('-lossless');
 	}
-
-	args.push('webp:-');
 
 	return through.obj(function (file, enc, cb) {
 		if (file.isNull()) {
@@ -31,36 +29,17 @@ module.exports = function (options) {
 			return;
 		}
 
-		var cp = spawn('convert', args);
+		exec
+			.use(webp, args.concat([exec.src(), '-o', exec.dest()]))
+			.run(file.contents, function (err, buf) {
+				if (err) {
+					cb(new gutil.PluginError('gulp-webp', err, {fileName: file.path}));
+					return;
+				}
 
-		cp.stdout.pipe(concat(function (data) {
-			if (file.isBuffer()) {
-				file.contents = data;
-			}
-
-			if (file.isStream()) {
-				file.contents = pause();
-				file.contents.pause();
-				file.contents.write(data);
-			}
-
-			file.contents = data;
-			file.path = gutil.replaceExtension(file.path, '.webp');
-			cb(null, file);
-		}));
-
-		cp.stderr.setEncoding('utf8');
-
-		cp.stderr.on('data', function (str) {
-			cb(new gutil.PluginError('gulp-webp', str, {fileName: file.path}));
-		});
-
-		if (file.isBuffer()) {
-			cp.stdin.end(file.contents);
-		}
-
-		if (file.isStream()) {
-			file.contents.pipe(cp.stdin);
-		}
+				file.contents = buf;
+				file.path = gutil.replaceExtension(file.path, '.webp');
+				cb(null, file);
+			});
 	});
 };
