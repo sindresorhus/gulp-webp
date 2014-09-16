@@ -1,6 +1,6 @@
 {
   "name": "gulp-webp",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Convert images to WebP",
   "license": "MIT",
   "repository": "sindresorhus/gulp-webp",
