@@ -33,9 +33,9 @@
     "gif"
   ],
   "dependencies": {
-    "concat-stream": "^1.4.1",
+    "cwebp-bin": "^1.0.0",
+    "exec-buffer": "^1.0.0",
     "gulp-util": "^3.0.0",
-    "pause-stream": "^0.0.11",
     "through2": "^0.6.1"
   },
   "devDependencies": {

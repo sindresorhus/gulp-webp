@@ -15,6 +15,7 @@ it('should convert images to WebP', function (cb) {
 	stream.on('end', cb);
 
 	stream.write(new gutil.File({
+		path: __dirname + '/fixture.png',
 		contents: fs.readFileSync('fixture.jpg')
 	}));
 
