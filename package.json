@@ -31,7 +31,7 @@
     "gif"
   ],
   "dependencies": {
-    "cwebp-bin": "^1.0.0",
+    "cwebp-bin": "^2.0.0",
     "exec-buffer": "^1.0.0",
     "gulp-util": "^3.0.0",
     "through2": "^0.6.1"
