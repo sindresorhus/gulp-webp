@@ -43,6 +43,14 @@ Type: `boolean`
 Default: `false`
 
 
+##### appendExtension
+
+Type: `boolean`  
+Default: `false`
+
+Instead of changing the file extension it appends .webp extension to the file name.
+
+
 ## License
 
 MIT © [Sindre Sorhus](http://sindresorhus.com)
