@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 var gutil = require('gulp-util');
 var through = require('through2');
 var ExecBuffer = require('exec-buffer');
@@ -19,7 +20,9 @@ module.exports = function (options) {
 	}
 
 	return through.obj(function (file, enc, cb) {
-		if (file.isNull()) {
+		var ext = path.extname(file.path).slice(1).toLowerCase();
+
+		if (file.isNull() || ['png', 'jpg', 'jpeg', 'tif', 'tiff', 'webp'].indexOf(ext) === -1) {
 			cb(null, file);
 			return;
 		}

@@ -2,6 +2,8 @@
 
 > Convert images to [WebP](https://developers.google.com/speed/webp/)
 
+Supports PNG, JPEG, TIFF, WebP.
+
 
 ## Install
 
@@ -25,6 +27,8 @@ gulp.task('default', function () {
 
 
 ## API
+
+Unsupported files are ignored.
 
 ### webp(options)
 
