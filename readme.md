@@ -1,4 +1,4 @@
-# gulp-webp
+# gulp-webp [![Build Status](https://travis-ci.org/sindresorhus/gulp-webp.svg?branch=master)](https://travis-ci.org/sindresorhus/gulp-webp)
 
 > Convert images to [WebP](https://developers.google.com/speed/webp/)
 
