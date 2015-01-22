@@ -7,7 +7,7 @@
   "author": {
     "name": "Sindre Sorhus",
     "email": "sindresorhus@gmail.com",
-    "url": "http://sindresorhus.com"
+    "url": "sindresorhus.com"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "cwebp-bin": "^2.0.0",
-    "exec-buffer": "^1.0.0",
+    "exec-buffer": "^2.0.0",
     "gulp-util": "^3.0.0",
     "through2": "^0.6.1"
   },

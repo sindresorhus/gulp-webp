@@ -7,7 +7,7 @@ Supports PNG, JPEG, TIFF, WebP.
 
 ## Install
 
-```sh
+```
 $ npm install --save-dev gulp-webp
 ```
 
