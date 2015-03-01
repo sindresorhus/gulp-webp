@@ -41,7 +41,13 @@ module.exports = function (options) {
 				}
 
 				file.contents = buf;
-				file.path = gutil.replaceExtension(file.path, '.webp');
+
+				if (options.appendExtension) {
+					file.path += '.webp';
+				} else {
+					file.path = gutil.replaceExtension(file.path, '.webp');
+				}
+
 				cb(null, file);
 			});
 	});

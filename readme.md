@@ -46,6 +46,14 @@ Max: `100`
 Type: `boolean`  
 Default: `false`
 
+##### appendExtension
+
+Type: `boolean`  
+Default: `false`
+
+If set to `true`, appends `.webp` to the original extension
+(e.g.:`image.jpg => image.jpg.webp`).
+
 
 ## License
 
