@@ -48,7 +48,7 @@ Default: `false`
 
 ##### appendExtension
 
-Type: `boolean`
+Type: `boolean`  
 Default: `false`
 
 If set to `true`, appends `.webp` to the original extension
