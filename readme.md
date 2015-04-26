@@ -32,20 +32,7 @@ Unsupported files are ignored.
 
 ### webp(options)
 
-#### options
-
-##### quality
-
-Type: `number`  
-Default: `100`  
-Min: `0`  
-Max: `100`
-
-##### lossless
-
-Type: `boolean`  
-Default: `false`
-
+See the [imagemin-webp](https://github.com/imagemin/imagemin-webp#imageminwebpoptions) options.
 
 ## License
 
