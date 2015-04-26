@@ -31,12 +31,13 @@
     "gif"
   ],
   "dependencies": {
-    "cwebp-bin": "^2.0.0",
-    "exec-buffer": "^2.0.0",
     "gulp-util": "^3.0.0",
-    "through2": "^0.6.1"
+    "imagemin-webp": "^3.0.1",
+    "modify-error-event": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "^2.2.4",
+    "vinyl": "^0.4.6",
+    "vinyl-file": "^1.1.1"
   }
 }
