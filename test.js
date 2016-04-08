@@ -1,4 +1,5 @@
 'use strict';
+/* eslint-env mocha */
 var assert = require('assert');
 var path = require('path');
 var File = require('vinyl');
@@ -7,7 +8,7 @@ var read = require('vinyl-file').read;
 var webp = require('./');
 
 it('should convert images to WebP', function (cb) {
-	read(path.join(__dirname, 'fixture.jpg'), function(err, file) {
+	read(path.join(__dirname, 'fixture.jpg'), function (err, file) {
 		assert.strictEqual(err, null);
 
 		var stream = webp();
@@ -40,7 +41,7 @@ it('should not convert unsupported files', function (cb) {
 it('should emit a plugin error when the image is corrupt', function (cb) {
 	var fileName = path.join(__dirname, 'fixture-corrupt.webp');
 
-	read(fileName, function(err, file) {
+	read(fileName, function (err, file) {
 		assert.strictEqual(err, null);
 
 		var stream = webp();

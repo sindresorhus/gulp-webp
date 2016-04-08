@@ -13,7 +13,7 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "xo && mocha"
   },
   "files": [
     "index.js"
@@ -38,6 +38,7 @@
   "devDependencies": {
     "mocha": "^2.2.4",
     "vinyl": "^1.1.0",
-    "vinyl-file": "^1.1.1"
+    "vinyl-file": "^1.1.1",
+    "xo": "*"
   }
 }
