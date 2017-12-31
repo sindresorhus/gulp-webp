@@ -1,58 +1,46 @@
-'use strict';
-/* eslint-env mocha */
-var assert = require('assert');
-var path = require('path');
-var File = require('vinyl');
-var gutil = require('gulp-util');
-var read = require('vinyl-file').read;
-var webp = require('./');
+import path from 'path';
+import test from 'ava';
+import Vinyl from 'vinyl';
+import vinylFile from 'vinyl-file';
+import PluginError from 'plugin-error';
+import pEvent from 'p-event';
+import m from '.';
 
-it('should convert images to WebP', function (cb) {
-	read(path.join(__dirname, 'fixture.jpg'), function (err, file) {
-		assert.strictEqual(err, null);
+test('converts images to WebP', async t => {
+	const file = await vinylFile.read(path.join(__dirname, 'fixture.jpg'));
+	const stream = m();
+	const size = file.contents.length;
 
-		var stream = webp();
-		var size = file.contents.length;
+	const promise = pEvent(stream, 'data');
+	stream.end(file);
+	const data = await promise;
 
-		stream.on('data', function (data) {
-			assert(data.contents.length < size);
-			assert.equal(data.path, path.join(__dirname, 'fixture.webp'));
-		});
-
-		stream.on('end', cb);
-
-		stream.end(file);
-	});
+	t.true(data.contents.length < size);
+	t.is(data.path, path.join(__dirname, 'fixture.webp'));
 });
 
-it('should not convert unsupported files', function (cb) {
-	var stream = webp();
+test('should not convert unsupported files', async t => {
+	const stream = m();
 
-	stream.on('data', function (data) {
-		assert.equal(String(data.contents), 'contents');
-		cb();
-	});
-
-	stream.end(new File({
-		contents: new Buffer('contents')
+	const promise = pEvent(stream, 'data');
+	stream.end(new Vinyl({
+		contents: Buffer.from('contents')
 	}));
+
+	const data = await promise;
+	t.is(data.contents.toString(), 'contents');
 });
 
-it('should emit a plugin error when the image is corrupt', function (cb) {
-	var fileName = path.join(__dirname, 'fixture-corrupt.webp');
+test('emits a plugin error when the image is corrupt', async t => {
+	const fileName = path.join(__dirname, 'fixture-corrupt.webp');
+	const file = await vinylFile.read(fileName);
+	const stream = m();
 
-	read(fileName, function (err, file) {
-		assert.strictEqual(err, null);
+	const promise = pEvent(stream, 'error');
+	stream.end(file);
 
-		var stream = webp();
-
-		stream.on('error', function (err) {
-			assert(err instanceof gutil.PluginError);
-			assert(err.plugin, 'gulp-webp');
-			assert.equal(err.fileName, fileName);
-			cb();
-		});
-
-		stream.end(file);
-	});
+	const err = await promise;
+	t.true(err instanceof PluginError);
+	t.is(err.plugin, 'gulp-webp');
+	t.is(err.fileName, fileName);
 });

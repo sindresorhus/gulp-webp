@@ -1,44 +1,45 @@
 {
-  "name": "gulp-webp",
-  "version": "2.3.0",
-  "description": "Convert images to WebP",
-  "license": "MIT",
-  "repository": "sindresorhus/gulp-webp",
-  "author": {
-    "name": "Sindre Sorhus",
-    "email": "sindresorhus@gmail.com",
-    "url": "sindresorhus.com"
-  },
-  "engines": {
-    "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "xo && mocha"
-  },
-  "files": [
-    "index.js"
-  ],
-  "keywords": [
-    "gulpplugin",
-    "webp",
-    "image",
-    "img",
-    "picture",
-    "photo",
-    "png",
-    "jpg",
-    "jpeg",
-    "gif"
-  ],
-  "dependencies": {
-    "gulp-util": "^3.0.0",
-    "imagemin-webp": "^3.0.1",
-    "modify-error-event": "^1.0.0"
-  },
-  "devDependencies": {
-    "mocha": "^2.2.4",
-    "vinyl": "^1.1.0",
-    "vinyl-file": "^1.1.1",
-    "xo": "*"
-  }
+	"name": "gulp-webp",
+	"version": "2.3.0",
+	"description": "Convert images to WebP",
+	"license": "MIT",
+	"repository": "sindresorhus/gulp-webp",
+	"author": {
+		"name": "Sindre Sorhus",
+		"email": "sindresorhus@gmail.com",
+		"url": "sindresorhus.com"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"gulpplugin",
+		"webp",
+		"image",
+		"img",
+		"picture",
+		"photo",
+		"png",
+		"jpg",
+		"jpeg",
+		"gif"
+	],
+	"dependencies": {
+		"imagemin-webp": "^3.0.1",
+		"modify-error-event": "^1.0.0",
+		"plugin-error": "^0.1.2"
+	},
+	"devDependencies": {
+		"ava": "*",
+		"p-event": "^1.3.0",
+		"vinyl": "^2.1.0",
+		"vinyl-file": "^3.0.0",
+		"xo": "*"
+	}
 }

@@ -1,10 +1,10 @@
 'use strict';
-var imageminWebp = require('imagemin-webp');
-var modifyErrorEvent = require('modify-error-event');
-var PluginError = require('gulp-util').PluginError;
+const imageminWebp = require('imagemin-webp');
+const modifyErrorEvent = require('modify-error-event');
+const PluginError = require('plugin-error');
 
-module.exports = function (options) {
-	return modifyErrorEvent(imageminWebp(options)(), function (err) {
+module.exports = options => {
+	return modifyErrorEvent(imageminWebp(options)(), err => {
 		return new PluginError('gulp-webp', err, {fileName: err.fileName});
 	});
 };
