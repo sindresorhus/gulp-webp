@@ -31,7 +31,7 @@
 		"gif"
 	],
 	"dependencies": {
-		"imagemin-webp": "^3.0.1",
+		"imagemin-webp": "^5.0.0",
 		"modify-error-event": "^1.0.0",
 		"plugin-error": "^0.1.2"
 	},
