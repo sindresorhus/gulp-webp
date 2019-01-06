@@ -4,11 +4,11 @@ import Vinyl from 'vinyl';
 import vinylFile from 'vinyl-file';
 import PluginError from 'plugin-error';
 import pEvent from 'p-event';
-import m from '.';
+import gulpWebp from '.';
 
 test('converts images to WebP', async t => {
 	const file = await vinylFile.read(path.join(__dirname, 'fixture.jpg'));
-	const stream = m();
+	const stream = gulpWebp();
 	const size = file.contents.length;
 
 	const promise = pEvent(stream, 'data');
@@ -20,10 +20,11 @@ test('converts images to WebP', async t => {
 });
 
 test('should not convert unsupported files', async t => {
-	const stream = m();
+	const stream = gulpWebp();
 
 	const promise = pEvent(stream, 'data');
 	stream.end(new Vinyl({
+		path: path.join(__dirname, 'fixture.jpg'),
 		contents: Buffer.from('contents')
 	}));
 
@@ -32,15 +33,15 @@ test('should not convert unsupported files', async t => {
 });
 
 test('emits a plugin error when the image is corrupt', async t => {
-	const fileName = path.join(__dirname, 'fixture-corrupt.webp');
+	const fileName = path.join(__dirname, 'fixture-corrupt.jpg');
 	const file = await vinylFile.read(fileName);
-	const stream = m();
+	const stream = gulpWebp();
 
 	const promise = pEvent(stream, 'error');
 	stream.end(file);
 
-	const err = await promise;
-	t.true(err instanceof PluginError);
-	t.is(err.plugin, 'gulp-webp');
-	t.is(err.fileName, fileName);
+	const error = await promise;
+	t.true(error instanceof PluginError);
+	t.is(error.plugin, 'gulp-webp');
+	t.is(error.fileName, fileName);
 });
