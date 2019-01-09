@@ -37,6 +37,7 @@
 	},
 	"devDependencies": {
 		"ava": "^1.0.1",
+		"file-type": "^10.7.0",
 		"p-event": "^2.1.0",
 		"vinyl": "^2.2.0",
 		"vinyl-file": "^3.0.0",

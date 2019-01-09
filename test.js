@@ -1,4 +1,5 @@
 import path from 'path';
+import fileType from 'file-type';
 import test from 'ava';
 import Vinyl from 'vinyl';
 import vinylFile from 'vinyl-file';
@@ -9,13 +10,12 @@ import gulpWebp from '.';
 test('converts images to WebP', async t => {
 	const file = await vinylFile.read(path.join(__dirname, 'fixture.jpg'));
 	const stream = gulpWebp();
-	const size = file.contents.length;
 
 	const promise = pEvent(stream, 'data');
 	stream.end(file);
 	const data = await promise;
 
-	t.true(data.contents.length < size);
+	t.is(fileType(file.contents).mime, 'image/webp');
 	t.is(data.path, path.join(__dirname, 'fixture.webp'));
 });
 
