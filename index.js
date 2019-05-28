@@ -1,7 +1,5 @@
-'use strict';
-const PluginError = require('plugin-error');
-const through = require('through2');
-const imageminWebp = require('imagemin-webp');
+import imageminWebp from 'imagemin-webp';
+import {gulpPlugin} from 'gulp-plugin-extras';
 
 const supportedExtensions = new Set([
 	'png',
@@ -9,37 +7,19 @@ const supportedExtensions = new Set([
 	'jpeg',
 	'tif',
 	'tiff',
-	'webp'
+	'webp',
 ]);
 
-module.exports = options => {
+export default function gulpWebp(options) {
 	const instance = imageminWebp(options);
 
-	return through.obj((file, encoding, callback) => {
-		if (file.isNull()) {
-			callback(null, file);
+	return gulpPlugin('gulp-webp', async file => {
+		if (!supportedExtensions.has(file.extname.slice(1).toLowerCase())) {
 			return;
 		}
 
-		if (file.isStream()) {
-			callback(new PluginError('gulp-webp', 'Streaming not supported'));
-			return;
-		}
-
-		const ext = file.extname.slice(1).toLowerCase();
-		if (!supportedExtensions.has(ext)) {
-			callback(null, file);
-			return;
-		}
-
-		instance(file.contents)
-			.then(result => {
-				file.contents = result;
-				file.extname = '.webp';
-				callback(null, file);
-			})
-			.catch(error => {
-				callback(new PluginError('gulp-webp', error, {fileName: file.path}));
-			});
+		file.contents = await instance(file.contents);
+		file.extname = '.webp';
+		return file;
 	});
-};
+}
