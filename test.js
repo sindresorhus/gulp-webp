@@ -5,11 +5,11 @@ import Vinyl from 'vinyl';
 import vinylFile from 'vinyl-file';
 import PluginError from 'plugin-error';
 import pEvent from 'p-event';
-import gulpWebp from '.';
+import webp from '.';
 
 test('converts images to WebP', async t => {
 	const file = await vinylFile.read(path.join(__dirname, 'fixture.jpg'));
-	const stream = gulpWebp();
+	const stream = webp();
 
 	const promise = pEvent(stream, 'data');
 	stream.end(file);
@@ -20,7 +20,7 @@ test('converts images to WebP', async t => {
 });
 
 test('should not convert unsupported files', async t => {
-	const stream = gulpWebp();
+	const stream = webp();
 
 	const promise = pEvent(stream, 'data');
 	stream.end(new Vinyl({
@@ -35,7 +35,7 @@ test('should not convert unsupported files', async t => {
 test('emits a plugin error when the image is corrupt', async t => {
 	const fileName = path.join(__dirname, 'fixture-corrupt.jpg');
 	const file = await vinylFile.read(fileName);
-	const stream = gulpWebp();
+	const stream = webp();
 
 	const promise = pEvent(stream, 'error');
 	stream.end(file);

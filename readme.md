@@ -18,7 +18,7 @@ $ npm install --save-dev gulp-webp
 const gulp = require('gulp');
 const webp = require('gulp-webp');
 
-gulp.task('default', () =>
+exports.default = () => (
 	gulp.src('src/image.jpg')
 		.pipe(webp())
 		.pipe(gulp.dest('dist'))
@@ -28,13 +28,8 @@ gulp.task('default', () =>
 
 ## API
 
-Note that unsupported files are ignored.
-
-### webp([options])
+### webp(options?)
 
 See the `imagemin-webp` [options](https://github.com/imagemin/imagemin-webp#imageminwebpoptions).
 
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)
+Note that unsupported files are ignored.

@@ -10,7 +10,7 @@
 		"url": "sindresorhus.com"
 	},
 	"engines": {
-		"node": ">=6"
+		"node": ">=8"
 	},
 	"scripts": {
 		"test": "xo && ava"
@@ -22,7 +22,6 @@
 		"gulpplugin",
 		"webp",
 		"image",
-		"img",
 		"picture",
 		"photo",
 		"png",
@@ -36,9 +35,9 @@
 		"through2": "^3.0.0"
 	},
 	"devDependencies": {
-		"ava": "^1.1.0",
-		"file-type": "^10.7.0",
-		"p-event": "^2.2.0",
+		"ava": "^2.3.0",
+		"file-type": "^12.2.0",
+		"p-event": "^4.1.0",
 		"vinyl": "^2.2.0",
 		"vinyl-file": "^3.0.0",
 		"xo": "^0.24.0"
