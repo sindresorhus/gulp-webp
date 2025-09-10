@@ -30,3 +30,5 @@ export default () => (
 See the `imagemin-webp` [options](https://github.com/imagemin/imagemin-webp#imageminwebpoptions).
 
 Unsupported files are ignored and passed through.
+
+Images with CMYK color spaces are passed through unchanged as WebP doesn't support CMYK.*

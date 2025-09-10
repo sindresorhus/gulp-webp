@@ -18,8 +18,17 @@ export default function gulpWebp(options) {
 			return;
 		}
 
-		file.contents = await instance(file.contents);
-		file.extname = '.webp';
-		return file;
+		try {
+			file.contents = await instance(file.contents);
+			file.extname = '.webp';
+			return file;
+		} catch (error) {
+			// Pass through files that cannot be converted (e.g., CMYK images)
+			if (error.message && error.message.includes('Unsupported color conversion request')) {
+				return file;
+			}
+
+			throw error;
+		}
 	});
 }

@@ -46,3 +46,18 @@ test('emits a plugin error when the image is corrupt', async t => {
 	t.is(error.plugin, 'gulp-webp');
 	t.is(error.fileName, fileName);
 });
+
+test('passes through CMYK images unchanged', async t => {
+	const fileName = path.join(__dirname, 'fixture-cmyk.jpg');
+	const file = await vinylFile(fileName);
+	const originalContents = file.contents;
+	const stream = webp();
+
+	const promise = pEvent(stream, 'data');
+	stream.end(file);
+
+	const data = await promise;
+	t.deepEqual(data.contents, originalContents);
+	t.is(data.extname, '.jpg');
+	t.is(data.path, fileName);
+});
